@@ -158,7 +158,7 @@ $('#download-png').addEventListener('click', async () => {
     errorCorrectionLevel: 'M',
     color: { dark: $('#foreground-input').value, light: $('#background-input').value }
   });
-  download(data, 'qr-studio.png');
+  download(data, 'nvanqr.png');
 });
 
 $('#download-svg').addEventListener('click', async () => {
@@ -170,7 +170,7 @@ $('#download-svg').addEventListener('click', async () => {
     errorCorrectionLevel: 'M',
     color: { dark: $('#foreground-input').value, light: $('#background-input').value }
   });
-  download(`data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`, 'qr-studio.svg');
+  download(`data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`, 'nvanqr.svg');
 });
 
 function download(href, filename) {

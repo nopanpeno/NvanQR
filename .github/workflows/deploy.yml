@@ -1,4 +1,4 @@
-name: Deploy QR Studio to GitHub Pages
+name: Deploy NvanQR to GitHub Pages
 
 on:
   push:

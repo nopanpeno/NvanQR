@@ -1,4 +1,4 @@
-# QR Studio
+# NvanQR
 
 Generator dan pembaca QR code berbasis browser. QR dibuat dan dipindai di perangkat pengguna; aplikasi tidak mengirim konten QR ke server.
 
