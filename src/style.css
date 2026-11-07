@@ -35,6 +35,8 @@ body {
   min-width: 320px;
   background-color: var(--paper);
   color: var(--ink);
+  /* Agar titik latar (z-index -1) tampil di atas warna body. */
+  isolation: isolate;
 }
 
 /* Titik latar diam di layar, sama seperti NvanCut. */
@@ -46,8 +48,7 @@ body::before {
   pointer-events: none;
   background-image: radial-gradient(var(--ink) 1px, transparent 1.4px);
   background-size: 24px 24px;
-  background-position: 20px 22px;
-  opacity: .14;
+  background-position: calc(20px + var(--dx,0px)) calc(22px + var(--dy,0px));
 }
 
 .app-shell { max-width: 1120px; margin: auto; padding: 0 36px; }
