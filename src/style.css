@@ -171,6 +171,9 @@ body::before {
   line-height: 1.7;
 }
 
+/* Kolom grid boleh menyusut, supaya teks panjang tidak mendorong halaman melebar. */
+.workspace > * { min-width: 0; }
+
 /* Cards */
 .card {
   background: var(--white);
@@ -265,6 +268,8 @@ input:not([type=checkbox]):not([type=color]),
 textarea,
 select {
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   border: 2px solid var(--ink);
   border-radius: 4px;
   background: #fff;
@@ -741,7 +746,7 @@ select:focus-visible {
   .topbar { min-height: 70px; }
   .intro { padding: 40px 0 28px; }
   .intro-copy { font-size: 14px; max-width: 400px; }
-  .workspace { grid-template-columns: 1fr; gap: 24px; }
+  .workspace { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .editor, .preview { padding: 22px; }
   .preview { min-height: 500px; }
   .qr-frame { min-height: 300px; margin: 18px 0; }
