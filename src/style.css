@@ -185,6 +185,8 @@ body::before {
   gap: 28px;
   align-items: stretch;
 }
+/* Cegah isi (canvas, teks panjang) melebarkan kolom grid. */
+.workspace > * { min-width: 0; }
 
 .editor { padding: 30px 32px; }
 .preview { padding: 28px 26px 24px; display: flex; flex-direction: column; }
@@ -450,8 +452,11 @@ textarea { resize: vertical; min-height: 100px; }
 .placeholder-icon i:nth-child(3) { background: var(--pink); }
 
 .qr-frame canvas {
-  width: min(280px, 80%);
-  height: auto;
+  /* qrcode.toCanvas memasang style width/height inline (360px); !important
+     diperlukan agar ukuran responsif ini tetap berlaku. */
+  width: min(280px, 80%) !important;
+  height: auto !important;
+  max-width: 100%;
   image-rendering: pixelated;
   border: 2.5px solid var(--ink);
   border-radius: 4px;
@@ -741,7 +746,7 @@ select:focus-visible {
   .topbar { min-height: 70px; }
   .intro { padding: 40px 0 28px; }
   .intro-copy { font-size: 14px; max-width: 400px; }
-  .workspace { grid-template-columns: 1fr; gap: 24px; }
+  .workspace { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .editor, .preview { padding: 22px; }
   .preview { min-height: 500px; }
   .qr-frame { min-height: 300px; margin: 18px 0; }
