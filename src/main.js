@@ -12,16 +12,25 @@ function escapeWifi(value) {
   return value.replace(/[\\;:,\"]/g, (character) => `\\${character}`);
 }
 
+// Input punya awalan "https://" di layar, jadi pengguna boleh mengetik tanpa skema.
+// Skema lain (javascript:, mailto:, dll) tetap ditolak.
+function normalizeLink(raw) {
+  if (/^https?:\/\//i.test(raw)) return raw;
+  if (/^(javascript|data|vbscript|file|ftp|mailto|tel|sms|blob):/i.test(raw) || /^[a-z][a-z0-9+.-]*:\/\//i.test(raw)) return '';
+  return `https://${raw.replace(/^\/+/, '')}`;
+}
+
 function getPayload() {
   if (contentType === 'link') {
     const value = $('#link-input').value.trim();
     if (!value) return { error: 'Masukkan URL untuk membuat QR code.' };
     try {
-      const url = new URL(value);
-      if (!['http:', 'https:'].includes(url.protocol) || !url.hostname) throw new Error();
+      const url = new URL(normalizeLink(value));
+      const host = url.hostname;
+      if (!['http:', 'https:'].includes(url.protocol) || !host || !(host.includes('.') || host === 'localhost')) throw new Error();
       return { value: url.href };
     } catch {
-      return { error: 'URL tidak valid. Gunakan alamat http:// atau https://.' };
+      return { error: 'URL tidak valid. Contoh: contoh.com/halaman atau https://contoh.com.' };
     }
   }
   if (contentType === 'text') {
